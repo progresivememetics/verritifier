@@ -1,10 +1,8 @@
-<!DOCTYPE html>
 <html>
  <head> 
  <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow">
  <script>
-	 //из России с любовью
  function refresh() {
 	location.reload();
  }
@@ -21,7 +19,10 @@
   document.getElementById("again").style.visibility = "hidden";
 
 };
-
+document.fonts.ready.then(function () { 
+	document.getElementById("verritButton").innerHTML = "Verritify!";
+	document.getElementById("verritButton").disabled = false;
+});
 
  
  var form = document.getElementById("veritForm"); 
@@ -63,7 +64,8 @@
      context.font = "bold 28px PT Sans Narrow";
      context.drawImage(imageObj, 0, 0);
 	 context.fillText(""+idText, 490,542);
-	 context.fillStyle = "#232323";
+	 context.fillStyle = "#232323"
+	 
 	 context.font = "bold 50px PT Sans Narrow";
 	 context.save();
      context.fillText(line1, 150, 200);
@@ -99,11 +101,8 @@
  </head>
   <body>
   
-<h1>IPM Verritifier Alpha Version 0.0.0.0.0.0.0.1</h1>
-<p>You are limited to 52 characters per line. Now get verriting! <br>
-	  Note: If the font shows up as serifed, try reloading the page and verritifying again.</p>
-	  	  <p>Disclaimer: This is intended for satire only. We are not affiliated in any way with Verrit or its field of corncobs, nor would we ever fucking be.</p>
-
+<h1 style="font-family: 'PT Sans Narrow';">IPM Verritifier</h1>
+<p>You are limited to 52 characters per line. Now get verriting!</p>
 <form id="veritForm"> 
   Source:<br>
   <input type="text" name="Source" id="source" size="40" maxlength="52" value="BlueShareReviewit"><br>
@@ -120,7 +119,7 @@
   Line 5:<br>
   <input type="text" name="Line 5" id="line5"size="40" maxlength="52" value=""><br><br>
   <button type="button"  onclick="clearAll()" id="clear"> Clear </button>
-  <button type="button"  onclick="verritify()" id="verritButton"> Verritify! </button>
+  <button type="button"  onclick="verritify()" id="verritButton" disabled> Loading Fonts... </button>
   <button type="button"  onclick="refresh()" id="again"> Click to make another one!</button>
 </form> 
     <canvas id="myCanvas" width=1200 height = 600>
