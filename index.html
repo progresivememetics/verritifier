@@ -60,6 +60,8 @@
 	 download.style.color = "blue";
 	 download.style.textDecoration = "underline";
 	 
+	 var uploadedImg = document.getElementById("uploadedImg");
+	 
 	 
 	 
      var canvas = document.getElementById("myCanvas");
@@ -142,9 +144,30 @@
          context.save();
          context.fillText(lines[4], 150, 400);
 		 context.save();
+		 
+		  
+		 //pasting on the image
+		 if(uploadedImg.src != "") {
+			//calculate appropriate height
+			var width = 200;
+			var height = 200;
+			if(uploadedImg.height <= 200 && uploadedImg.width <= 400) {
+				width = uploadedImg.width;
+				height = uploadedImg.height;
+			}
+			else {
+				height = Math.floor(uploadedImg.width/width * uploadedImg.height);
+		    }
+			context.drawImage(uploadedImg, 1200 - width - 50, 50,width,height);
+			context.save();
+		 }
+		 
+		 //pasting the link in the bottom right corner
 		 context.font = "14px PT Sans Narrow";
 		 context.fillText("bit.do/verritify", 1125, 592);
-         context.translate(600, 300);
+        
+		 //pasting on the source
+		 context.translate(600, 300);
          context.save();
          context.rotate(-Math.PI / 2);
          context.save();
@@ -175,6 +198,22 @@
 	 return idText;
  }
  
+ function previewFile(){
+       var preview = document.querySelector('img'); //selects the query named img
+       var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+       var reader  = new FileReader();
+
+       reader.onloadend = function () {
+           preview.src = reader.result;
+       }
+
+       if (file) {
+           reader.readAsDataURL(file); //reads the data as a URL
+       } else {
+           preview.src = "";
+       }
+  }
+ 
  
  
  //form.addEventListener('submit', handleForm);
@@ -193,7 +232,9 @@
 	<textarea id="inputText" rows="5" cols="52" maxlength="260">Write a paragraph of up to 260 characters OR write up to 5 lines of 52 characters each.
 It will automatically append text beyond the 5th line to the 5th line. Any text beyond 52 characters on any line will auto-wrap.
 	  </textarea><br>
-		  
+	  Image: <input type="file" onchange="previewFile()"><br>
+	  <strong>*WARNING* If using an image, limit yourself to about 30 characters for the first 2 or 3 lines. Don't use autowrap.</strong><br>
+	  <img id="uploadedImg" src="" height="200" alt="No valid image selected..."><br>
 		  <!-- <form id="veritForm">  -->
 
 
