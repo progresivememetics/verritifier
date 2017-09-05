@@ -30,8 +30,9 @@
  window.onload = function() {
      document.getElementById("again").style.display = "none";
 	 document.getElementById("download").style.display = "none";
-	 document.getElementById("verritButton").style.display = "inline";
-     document.getElementById("clear").style.display = "inline";
+	 //document.getElementById("verritButton").style.display = "inline";
+     //document.getElementById("clear").style.display = "inline";
+	 document.getElementById("myCanvas").style.display = "none";
 	 document.getElementById('download').addEventListener('click', function() {
      downloadCanvas(this, 'myCanvas', 'verritified_headline.png');
 }, false);
@@ -62,6 +63,7 @@
 	 
 	 
      var canvas = document.getElementById("myCanvas");
+	 canvas.style.display = "block";
 	 
 	function dlCanvas() {
 		var dt = canvas.toDataURL('image/png');
@@ -133,11 +135,14 @@
          context.fillText(lines[3], 150, 350);
          context.save();
          context.fillText(lines[4], 150, 400);
-         context.translate(600, 300)
+		 context.save();
+		 context.font = "14px PT Sans Narrow";
+		 context.fillText("bit.do/verritify", 1125, 592);
+         context.translate(600, 300);
          context.save();
          context.rotate(-Math.PI / 2);
          context.save();
-         context.translate(-600, -300)
+         context.translate(-600, -300);
          context.font = "bold 30px PT Sans Narrow";
          context.fillText(source, 350, -210);
          context.rotate(Math.PI / 2);
@@ -145,7 +150,7 @@
          // open the image in a new browser tab
          // the user can right-click and save that image
          //var win=window.open();
-         this.document.write("<img src='" + canvas.toDataURL() + "'/>");
+         //this.document.write("<img src='" + canvas.toDataURL() + "'/>");
      };
 	 
 	 
@@ -167,68 +172,12 @@
  
  
  //form.addEventListener('submit', handleForm);
- function verritify() {
-     document.getElementById("again").style.visibility = "visible";
-     document.getElementById("verritButton").style.visibility = "hidden";
-     document.getElementById("clear").style.visibility = "hidden";
-     var canvas = document.getElementById("myCanvas");
-     var context = canvas.getContext("2d");
-     context.clearRect(0, 0, canvas.width, canvas.height);
-     var imageObj = new Image();
-     var line1 = document.getElementById("line1").value;
-     var line2 = document.getElementById("line2").value;
-     var line3 = document.getElementById("line3").value;
-     var line4 = document.getElementById("line4").value;
-     var line5 = document.getElementById("line5").value;
-     var source = document.getElementById("source").value;
-     // var number = Math.floor(Math.random() * 10000000);
-     // var idText = "";
-     // var digits = Math.ceil(Math.log10(number));
-     // var leadingZeroes = 7 - digits;
-     // while (leadingZeroes > 0) {
-         // idText += "0";
-         // leadingZeroes--;
-     // }
-     //idText += number;
-	 var idText = generateCode();
-     //imageObj.src = "https://i.imgur.com/vKf3NgP.jpg"; 
-     imageObj.src = "https://i.imgur.com/fzrXind.jpg";
-     imageObj.onload = function() {
-         context.font = "bold 28px PT Sans Narrow";
-         context.drawImage(imageObj, 0, 0);
-         context.fillText("" + idText, 490, 542);
-         context.fillStyle = "#232323";
-         context.font = "bold 50px PT Sans Narrow";
-         context.save();
-         context.fillText(line1, 150, 200);
-         context.save();
-         context.fillText(line2, 150, 250);
-         context.save();
-         context.fillText(line3, 150, 300);
-         context.save();
-         context.fillText(line4, 150, 350);
-         context.save();
-         context.fillText(line5, 150, 400);
-         context.translate(600, 300)
-         context.save();
-         context.rotate(-Math.PI / 2);
-         context.save();
-         context.translate(-600, -300)
-         context.font = "bold 30px PT Sans Narrow";
-         context.fillText(source, 350, -210);
-         context.rotate(Math.PI / 2);
-         context.save();
-         // open the image in a new browser tab
-         // the user can right-click and save that image
-         //var win=window.open();
-         //this.document.write("<img src='" + canvas.toDataURL() + "'/>");
-     };
- };
+ 
 </script>
  </head>
   <body>
   
-<h1 style="font-family: 'PT Sans Narrow';">IPM Verritifier 0.0.0.0.0.0.0.2</h1>
+<h1 style="font-family: 'PT Sans Narrow';">IPM Verritifier 0.0.0.0.0.0.0.3</h1>
   <p>Make your own Verrit news headline below! Spread your truth! Get Verriting!</p>
   	  	  <p>Disclaimer: This is intended for satire only. We are not affiliated in any way with Verrit or its field of corncobs, nor would we ever fucking be.</p>
 	
@@ -259,6 +208,7 @@ It will automatically append text beyond the 5th line to the 5th line. Any text 
   <a id="download" download="verritified.png">Download It!</a>
   <button type="button"  onclick="refresh()" id="again"> Click to make another one!</button>
 <!-- </form>  -->
+<br>
     <canvas id="myCanvas" width=1200 height = 600>
     </canvas>
   </body>
