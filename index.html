@@ -76,6 +76,12 @@
      var imageObj = new Image();
      imageObj.setAttribute('crossOrigin', 'anonymous');
      var textArea = document.getElementById("inputText").value;
+	 
+	 //put in smart quotes
+	 textArea = textArea.replace(/"(?=\w|$)/g, "“");
+	 textArea = textArea.replace(/"/g, "”"); 
+	 
+	 
 	 var lines = textArea.split("\n");
 	 //alert(lines.length);
 	 
