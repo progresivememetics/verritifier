@@ -115,7 +115,7 @@
 			if(end > 0) {
 				excess = lines[i].substring(end);
 			}
-			lines[i+1] = lines[i+1] + excess;
+			lines[i+1] = excess + lines[i+1];
 			lines[i] = lines[i].substring(0,end);
 			//alert(lines[i+1]);
 		}
